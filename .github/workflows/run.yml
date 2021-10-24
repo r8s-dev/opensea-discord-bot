@@ -6,7 +6,7 @@ on:
     - cron: "45 * * * *"
 
 jobs:
-  risingskulls:
+  risingskullsListings:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -19,3 +19,17 @@ jobs:
           COLLECTION_SLUG: rising-skulls
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
           DISCORD_CHANNEL_ID: "899725100205608981"
+
+  risingskullsSales:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: mskelton/setup-yarn@v1
+
+      - run: yarn ts-node ./checkSales.ts
+        env:
+          CONTRACT_ADDRESS: ""
+          COLLECTION_SLUG: rising-skulls
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          DISCORD_CHANNEL_ID: "901878596140945491"
