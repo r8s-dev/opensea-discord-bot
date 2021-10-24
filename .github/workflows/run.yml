@@ -15,7 +15,7 @@ jobs:
 
       - run: yarn ts-node ./checkListings.ts
         env:
-          # CONTRACT_ADDRESS: ""
+          CONTRACT_ADDRESS: ""
           COLLECTION_SLUG: rising-skulls
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
           DISCORD_CHANNEL_ID: "899725100205608981"
