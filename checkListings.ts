@@ -50,7 +50,7 @@ async function main() {
     collection_slug: process.env.COLLECTION_SLUG!,
   })
 
-  if (process.env.CONTRACT_ADDRESS !== OPENSEA_SHARED_STOREFRONT_ADDRESS) {
+  if (process.env.CONTRACT_ADDRESS && process.env.CONTRACT_ADDRESS !== OPENSEA_SHARED_STOREFRONT_ADDRESS) {
     params.append('asset_contract_address', process.env.CONTRACT_ADDRESS!)
   }
 

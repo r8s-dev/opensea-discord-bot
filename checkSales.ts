@@ -51,15 +51,24 @@ async function main() {
     collection_slug: process.env.COLLECTION_SLUG!,
   })
 
-  if (process.env.CONTRACT_ADDRESS !== OPENSEA_SHARED_STOREFRONT_ADDRESS) {
+  if (process.env.CONTRACT_ADDRESS && process.env.CONTRACT_ADDRESS !== OPENSEA_SHARED_STOREFRONT_ADDRESS) {
     params.append('asset_contract_address', process.env.CONTRACT_ADDRESS!)
   }
 
-  const openSeaResponse = await fetch(
-    "https://api.opensea.io/api/v1/events?" + params).then((resp) => resp.json());
-    
+  const openSeaResponse = await fetch("https://api.opensea.io/api/v1/events?" + params)
+    .then((resp) => {
+      console.log(`Raw OpenSea response status: ${JSON.stringify(resp.status)}`);
+      return resp.json()
+    });
+  
+  console.log(openSeaResponse);
+  const newEvents = openSeaResponse?.asset_events?.reverse();
+  console.log(`Found new events: ${newEvents}`);
+  
+  if (!newEvents) return [];
+
   return await Promise.all(
-    openSeaResponse?.asset_events?.reverse().map(async (sale: any) => {
+    newEvents.map(async (sale: any) => {
       const message = buildMessage(sale);
       return channel.send(message)
     })
