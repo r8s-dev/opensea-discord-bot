@@ -55,7 +55,14 @@ async function main() {
     params.append('asset_contract_address', process.env.CONTRACT_ADDRESS!)
   }
 
-  const openSeaResponse = await fetch("https://api.opensea.io/api/v1/events?" + params)
+  let headers = {
+    method: 'GET',
+    headers:{
+      "X-API-KEY": process.env.OPENSEA_API_KEY
+    }
+  }
+
+  const openSeaResponse = await fetch("https://api.opensea.io/api/v1/events?" + params, headers)
     .then((resp) => {
       console.log(`Raw OpenSea response status: ${JSON.stringify(resp.status)}`);
       return resp.json()
