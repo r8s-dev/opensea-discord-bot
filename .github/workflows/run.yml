@@ -19,6 +19,7 @@ jobs:
           COLLECTION_SLUG: rising-skulls
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
           DISCORD_CHANNEL_ID: "899725100205608981"
+          OPENSEA_API_KEY: ${{ secrets.OPENSEA_API_KEY }}
 
   risingskullsSales:
     runs-on: ubuntu-latest
@@ -29,7 +30,8 @@ jobs:
 
       - run: yarn ts-node ./checkSales.ts
         env:
-          CONTRACT_ADDRESS: ""
+          # CONTRACT_ADDRESS: ""
           COLLECTION_SLUG: rising-skulls
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
           DISCORD_CHANNEL_ID: "901878596140945491"
+          OPENSEA_API_KEY: ${{ secrets.OPENSEA_API_KEY }}
